@@ -58,7 +58,7 @@ $data = new Dataset\CsvDataset( $csv_insurance, true );
 // =========================================================
 $class = $methods->preprocess_namespace .  $methods->PREPROCESS;
 
-$dataset = new $class( $data, 0.2 ); // $dataset = new \Phpml\CrossValidation\RandomSplit( $data, 0.2 );
+$dataset = new $class( $data, 0.5 ); // $dataset = new \Phpml\CrossValidation\RandomSplit( $data, 0.2 );
 $blocks_of_data = [ 
   $dataset->getTrainSamples(),
   $dataset->getTrainLabels(),
@@ -75,7 +75,11 @@ $regression = new $class(); // $regression = new \Phpml\Regression\LeastSquares(
 // =========================================================
 // trained based on samples and labels. The model is now ready to make predictions.
 $regression->train( $trainsamples, $trainlabels );
-
+try {
+  $regression->train( $trainsamples, $trainlabels );
+} catch (Exception $e) {
+  die($e->getMessage());
+}
 // 3. Run a prediction in the rest of sample data
 // =========================================================
 // Now we are ready to predict 

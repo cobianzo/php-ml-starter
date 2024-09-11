@@ -18,3 +18,7 @@ php insurance.php
 php wine.php
 php iris.php
 ```
+
+If you have problems of permissions, you will need to grant them for the vendor folder:
+
+`find /path/to//php-ml/vendor -type f -exec chmod +x {} \`
